@@ -1,0 +1,42 @@
+#AMQ Configurations
+anypoint-mq:
+    # replace if mq url changed
+    server-url: # replace if mq url changed
+                "REPLACE_BY_USER"
+    case-queue-name: "sfa-sfdc-case-exchange"
+    case-dl-queue-name: "sfa-sfdc-case-dlq"
+#Salesforce Configurations    
+sfdc:
+    #replace with respective sfdc username
+    userName: 
+              "REPLACE_BY_USER"
+    topicName: "All_Cases"
+    #Replace with higher values to prevent duplicate cases from SFDC
+    replayId: "1"
+    
+#Customize the application messages in the below section    
+application-msgs:
+   #Before Connector logger message
+   before-connector-call-message: "Before Connector Call"
+   #After Connector logger message
+   after-connector-call-message: "After Connector Call"
+   #Local Exception Handler logger message
+   local-exception-handler-message: "Exception has occured"
+#MUNIT Message for failed tests
+munit:
+   message: "Test Failed"
+   lookupId: "REPLACE_BY_USER"
+
+#retry
+retry:
+   amq: 
+    delayMillisecs: "3000"
+    numRetries: "3"
+#reconnection
+reconnection:
+     amq:
+      frequency: "2000"
+      attempts: "2"
+     sfdc:
+      frequency: "3000"
+      attempts: "3"  
