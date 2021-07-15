@@ -21,11 +21,11 @@ payload]]></ee:set-payload>
 		<logger level="TRACE" doc:name="Before Publish" doc:id="ef6a8cdb-75a1-4083-8c25-048a18f1d22c" message="${application-msgs.before-connector-call-message}"/>
 		<until-successful doc:name="until-successful-publish-to-case-amqueue" doc:id="8158a41d-9329-454c-8a42-91535e07488c" millisBetweenRetries="${retry.amq.delayMillisecs}" maxRetries="${retry.amq.numRetries}">
 			<jms:publish doc:name="Publish" doc:id="e1884d8e-4bb2-423c-aea8-9246be5d8fd7" config-ref="JMS_Config" destination="${anypoint-mq.case-queue-name}" destinationType="TOPIC" sendCorrelationId="AUTO">
-				<jms:message outboundContentType="application/JSON" correlationId="#[correlationId]">
+				<jms:message outboundContentType="application/JSON" correlationId="#[message.attributes.properties.correlationId]">
 					<jms:properties ><![CDATA[#[output application/java
 ---
 {
-	correlationId : correlationId
+	correlationId : message.attributes.properties.correlationId
 }]]]></jms:properties>
 				</jms:message>
 			</jms:publish>
